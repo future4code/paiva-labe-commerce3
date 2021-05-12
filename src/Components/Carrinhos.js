@@ -15,7 +15,7 @@ export default class carrinhos extends React.Component{
   
         </div>
         <div>
-        <p>1x "Viagem à Lua  </p>
+        <p>1x Viagem à Lua  </p>
         <button>Remover</button>
   
         </div>
