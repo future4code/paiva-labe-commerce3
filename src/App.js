@@ -18,18 +18,30 @@ class App extends React.Component {
     listaDeProdutos: [
       {
         id: 1,
-        name: "produto 1",
-        value: 10000.0,
-        imageUrl: "https://picsum.photos/200/200",
+        name: "Viagem a Citadel!",
+        value: 50000,
+        imageUrl: cidadeEspacial,
       },
       {
         id: 2,
-        name: "produto 2",
-        value: 15000.0,
-        imageUrl: "https://picsum.photos/200/201",
+        name: "Viagem a Lua!",
+        value: 100000,
+        imageUrl: lua,
+      },
+      {
+        id: 3,
+        name: "Viagem a Marte",
+        value: 150000,
+        imageUrl: marte,
+      },
+      {
+        id: 4,
+        name: "Viagem a Saturno",
+        value: 300000,
+        imageUrl: saturno,
       }
     ],
-    valorMinimo: -Infinity,
+    valorMinimo: Number.NEGATIVE_INFINITY,
     valorMaximo: Infinity,
     buscarPorNome: "",
   }
@@ -46,27 +58,9 @@ class App extends React.Component {
     this.setState({ buscarPorNome: event.target.value })
   }
 
-  // filtroProdutos = () => {
-  //   const produtosFiltrados = []
-  //   // if (this.state.valorMinimo) {
-  //   produtosFiltrados = this.state.listaDeProdutos.filter(informacao => {
-  //     return informacao.value >= this.state.valorMinimo;
-  //   })
-  //   console.log(produtosFiltrados)
-  //   // })}
-  //   // else if (this.state.valorMaximo) {
-  //   //     produtosFiltrados = produtosFiltrados.filter(informacao => {
-  //   //     return informacao.value <= this.state.valorMaximo;})}
-  //   // else if (this.state.buscarPorNome !== "") {
-  //   //     return informacao; 
-  //   // }
-  // }
-
   render() {
     return (
       <MainContainer>
-
-        {/* <button onClick={this.filtroProdutos}>teste</button> */}
         <Filtros
           valMin={this.state.valorMinimo}
           valMax={this.state.valorMaximo}
@@ -74,10 +68,12 @@ class App extends React.Component {
           onChangeValorMinimo={this.onChangeValorMinimo}
           onChangeValorMaximo={this.onChangeValorMaximo}
           onChangeBuscarPorNome={this.onChangeBuscarPorNome}
+          filtrarProdutos={this.filtrarProdutos}
         />
         <Home
           listaDeProdutos={this.state.listaDeProdutos}
           valMin={this.state.valorMinimo}
+          valMax={this.state.valorMaximo}
         />
         <Carrinhos
           listaDeProdutos={this.state.listaDeProdutos}

@@ -31,9 +31,6 @@ class Filtros extends React.Component {
           value={this.props.search}
           onChange={this.props.onChangeBuscarPorNome}
         />
-  
-  
-  
       </SectionFilter>
     );
   }

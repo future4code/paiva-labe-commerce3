@@ -8,13 +8,22 @@ const SectionHome = styled.div`
 const Cards = styled.div`
   border: 1px solid purple;
   margin: 16px;
+
+  img {
+    width: 240px;
+    height: 300px;
+  }
 `
 
 class Home extends React.Component {
-  
-
   render() {
-    const cardContainer = this.props.listaDeProdutos.map((informacao) => {
+    const listaFiltrada = this.props.listaDeProdutos.filter((produtos) => {
+      if ((produtos.value >= this.props.valMin) && (produtos.value <= this.props.valMax)) {
+        return true;
+      } 
+    })
+
+    const cardContainer = listaFiltrada.map((informacao) => {
         return (
           <Cards>
             <img src={informacao.imageUrl} alt={"não aparece"} />
@@ -36,7 +45,7 @@ class Home extends React.Component {
           </select>
         </div>
         <SectionHome>
-          {/* {cardContainer} */}
+          {cardContainer}
         </SectionHome>
       </div>
     );
