@@ -59,7 +59,7 @@ export default class carrinhos extends React.Component{
    
     compraRealizada = () =>{
 
-      /* colocar efeito de obrigada pela compra, vai pesquisar como kk */
+      /* colocar funçao de obrigada pela compra, volte sempre*/
 
 
     }
