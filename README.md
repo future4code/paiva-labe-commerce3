@@ -28,6 +28,7 @@ os desenvolvedores do código
 - Botão de ordenação (crescente/decrescente) de produtos não funciona;
 - Botão de remoção não está removendo o produto quando a quantidade deste é zerada;
 - Site não está operando responsivamente;
+- CSS não está funcionando perfeitamente;
 
 ## Imagens do projeto
 ![tela inicial](https://user-images.githubusercontent.com/81280346/118318967-7b507600-b4d0-11eb-8935-8e70ba053eac.png)
