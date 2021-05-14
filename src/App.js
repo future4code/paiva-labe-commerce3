@@ -45,39 +45,36 @@ class App extends React.Component {
         id: 1,
         name: "Citadel",
         value: 50000,
-        imageUrl: cidadeEspacial
+        imageUrl: cidadeEspacial,
+        quantidade: 0
       },
       {
         id: 2,
         name: "Lua",
         value: 100000,
-        imageUrl: lua
+        imageUrl: lua,
+        quantidade: 0
       },
       {
         id: 3,
         name: "Marte",
         value: 150000,
-        imageUrl: marte
+        imageUrl: marte,
+        quantidade: 0
       },
       {
         id: 4,
         name: "Saturno",
         value: 300000,
-        imageUrl: saturno
+        imageUrl: saturno,
+        quantidade: 0
       }
     ],
     valorMinimo: Number.NEGATIVE_INFINITY,
     valorMaximo: Infinity,
     buscarPorNome: "",
     somaValor: 0,
-    caixaCarrinho: [
-      {
-        id: 0,
-        name: "",
-        value: 0,
-        imageUrl: ""
-      }
-    ]
+    caixaCarrinho: []
   };
 
   onChangeValorMinimo = (event) => {
@@ -93,7 +90,9 @@ class App extends React.Component {
   };
 
   onClickadicionaCarrinho = (id) => {
-    const blocoCarrinho = this.state.listaDeProdutos.filter((informacao) => {
+    const copiaListaDeProdutos = [...this.state.listaDeProdutos];
+
+    const blocoCarrinho = copiaListaDeProdutos.filter((informacao) => {
       if (informacao.id === id) {
         this.setState({ somaValor: this.state.somaValor + informacao.value });
         return true;
@@ -102,9 +101,63 @@ class App extends React.Component {
       }
     });
 
-    const somaBlocoCarrinho = [...this.state.caixaCarrinho, blocoCarrinho[0]];
+    let copiaCaixaCarrinho = [...this.state.caixaCarrinho];
 
-    this.setState({ caixaCarrinho: somaBlocoCarrinho });
+    let testeEstaNoCarrinho = false;
+
+    copiaCaixaCarrinho.map((item) => {
+      if (id === item.id) {
+        testeEstaNoCarrinho = true;
+        item.quantidade = item.quantidade + 1;
+      }
+      return false;
+    });
+
+    if (!testeEstaNoCarrinho) {
+      blocoCarrinho[0].quantidade = 1;
+      copiaCaixaCarrinho.push(blocoCarrinho[0]);
+    }
+
+    this.setState({ caixaCarrinho: copiaCaixaCarrinho });
+  };
+
+  onClickRemoveCarrinho = (id) => {
+    const copiaListaDeProdutos = [...this.state.listaDeProdutos];
+    console.log(copiaListaDeProdutos);
+
+    const blocoCarrinho = copiaListaDeProdutos.filter((informacao) => {
+      if (informacao.id === id) {
+        this.setState({ somaValor: this.state.somaValor - informacao.value });
+        return true;
+      } else {
+        return false;
+      }
+    });
+    console.log(blocoCarrinho);
+
+    let copiaCaixaCarrinho = [...this.state.caixaCarrinho];
+
+    console.log(copiaCaixaCarrinho);
+
+    let testeEstaNoCarrinho = false;
+
+    copiaCaixaCarrinho.map((item) => {
+      if (id === item.id) {
+        testeEstaNoCarrinho = true;
+        item.quantidade = item.quantidade - 1;
+      }
+      return false;
+    });
+
+    console.log(testeEstaNoCarrinho);
+
+    if (!testeEstaNoCarrinho) {
+      console.log("entrei aqui!");
+      blocoCarrinho[0].quantidade = 0;
+      copiaCaixaCarrinho.reduce(id, 1);
+    }
+
+    this.setState({ caixaCarrinho: copiaCaixaCarrinho });
   };
 
   render() {
@@ -137,6 +190,7 @@ class App extends React.Component {
             listaDeProdutos={this.state.listaDeProdutos}
             caixaCarrinho={this.state.caixaCarrinho}
             somaDeValores={this.state.somaValor}
+            onClickRemoveCarrinho={this.onClickRemoveCarrinho}
           />
         </MainContainer>
       </div>

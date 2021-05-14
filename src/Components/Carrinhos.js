@@ -33,15 +33,17 @@ const ItemProduto = styled.div`
 export default class Carrinhos extends React.Component {
   render() {
     const adicionaProduto = this.props.caixaCarrinho.map((informacao) => {
-      if (informacao.name !== "") {
-        return (
-          <ItemProduto>
-            <p>1x</p>
-            <p>{informacao.name}</p>
-            <button>Remover</button>
-          </ItemProduto>
-        );
-      }
+      return (
+        <ItemProduto>
+          <p>{informacao.quantidade}</p>
+          <p>{informacao.name}</p>
+          <button
+            onClick={() => this.props.onClickRemoveCarrinho(informacao.id)}
+          >
+            Remover
+          </button>
+        </ItemProduto>
+      );
     });
 
     return (
@@ -53,5 +55,3 @@ export default class Carrinhos extends React.Component {
     );
   }
 }
-
-
