@@ -1,101 +1,57 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const DentrodoCarrinho = styled.div`
-width: 20vw;
-height: 30vw;
-display: flex;
-flex-direction: column;
-//flex:1;
-padding: 8px;
-border: 1px solid orange; 
-/* justify-content: flex-end; */
-//justify-items: center;
-`
+  width: 15vw;
+  height: 30vw;
+  padding: 8px;
+  border: 1px outset darkgrey;
+  box-shadow: 2px 4px black;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
 
 const ItemProduto = styled.div`
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 8px;
+  background-color: lightseagreen;
+  border: 1px solid green;
+  border-radius: 4px;
+  padding: 4px;
 
-`
+  button {
+    height: 32px;
+    border-radius: 16px;
+    margin-left: 8px;
+  }
+`;
 
 export default class Carrinhos extends React.Component {
-
-  // state = {
-  //   produtos: [],
-  //   remover: ""
-  // }
-
-  onClickRemover = (idDeletar) => {
-    if (window.confirm()) {
-      const removerProduto = [...this.state.produtos]
-      const produtoRemovido = removerProduto.filter((produtos) => {
-
-        return produtos.index !== idDeletar;
-      })
-
-      this.setState({ produtos: produtoRemovido })
-    } else {
-
-      return
-    }
-
-  }
-
-
-
-  carrinhoVazio = () => {
-    const vazio = {
-      produtos: this.state.produtos,
-      semProdutos: this.state.produtos,
-      index: Math.random()
-    }
-    if (vazio.produtos === "") {
-      alert("Carrinho esta vazio")
-      return
-    }
-
-
-
-  }
-
-
-
-  compraRealizada = () => {
-
-    /* colocar funçao de obrigada pela compra, volte sempre*/
-
-
-  }
-
-
   render() {
-    const adicionaProduto = this.props.listaDeProdutos.map((informacao) => {
-      return (
-        <ItemProduto>
-          <p>1x</p>
-          <p>{informacao.name}</p>
-          <button>Remover</button>
-        </ItemProduto>
-      )
+    const adicionaProduto = this.props.caixaCarrinho.map((informacao) => {
+      if (informacao.name !== "") {
+        return (
+          <ItemProduto>
+            <p>1x</p>
+            <p>{informacao.name}</p>
+            <button>Remover</button>
+          </ItemProduto>
+        );
+      }
     });
 
     return (
       <DentrodoCarrinho>
         <h4>Carrinho:</h4>
         <div>{adicionaProduto}</div>
-        <p>Valor total:</p>
+        <p>Valor total: R${this.props.somaDeValores}</p>
       </DentrodoCarrinho>
     );
-
-
-
-
   }
-
-
-
 }
+
 
